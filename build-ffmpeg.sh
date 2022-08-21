@@ -6,7 +6,8 @@ FF_VERSION="4.3.1"
 if [[ $FFMPEG_VERSION != "" ]]; then
   FF_VERSION=$FFMPEG_VERSION
 fi
-SOURCE="ffmpeg-$FF_VERSION"
+#SOURCE="ffmpeg-$FF_VERSION"
+SOURCE="../FFmpeg"
 FAT="FFmpeg-iOS"
 
 SCRATCH="scratch"
@@ -23,6 +24,7 @@ CONFIGURE_FLAGS="--enable-cross-compile --disable-debug --disable-programs \
 
 
 CONFIGURE_FLAGS="$CONFIGURE_FLAGS --disable-bsf=mpeg2_metadata --disable-audiotoolbox"
+
 
 if [ "$X264" ]
 then
@@ -83,12 +85,12 @@ then
 			|| exit 1
 	fi
 
-	if [ ! -r $SOURCE ]
-	then
-		echo 'FFmpeg source not found. Trying to download...'
-		curl http://www.ffmpeg.org/releases/$SOURCE.tar.bz2 | tar xj \
-			|| exit 1
-	fi
+#	if [ ! -r $SOURCE ]
+#	then
+#		echo 'FFmpeg source not found. Trying to download...'
+#		curl http://www.ffmpeg.org/releases/$SOURCE.tar.bz2 | tar xj \
+#			|| exit 1
+#	fi
 
 	CWD=`pwd`
 	for ARCH in $ARCHS
@@ -146,7 +148,7 @@ then
 		    --prefix="$THIN/$ARCH" \
 		|| exit 1
 
-		make -j3 install $EXPORT || exit 1
+		make -j8 install $EXPORT || exit 1
 		cd $CWD
 	done
 fi
