@@ -21,6 +21,9 @@ THIN=`pwd`/"thin"
 CONFIGURE_FLAGS="--enable-cross-compile --disable-debug --disable-programs \
                  --disable-doc --enable-pic"
 
+
+CONFIGURE_FLAGS="$CONFIGURE_FLAGS --disable-bsf=mpeg2_metadata --disable-audiotoolbox"
+
 if [ "$X264" ]
 then
 	CONFIGURE_FLAGS="$CONFIGURE_FLAGS --enable-gpl --enable-libx264"
